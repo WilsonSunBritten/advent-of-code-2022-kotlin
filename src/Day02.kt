@@ -1,10 +1,9 @@
 fun main() {
-
     fun part1(input: List<String>): Int {
         return input.map { round ->
             val split = round.split(" ")
-            val opponentPlay = opponentPlay[split.first()]!!
-            val myPlay = myPlay[split[1]]!!
+            val opponentPlay = opponentPlay[split.first()] ?: error("bad input")
+            val myPlay = myPlay[split[1]] ?: error("bad input")
             gameScore(opponentPlay, myPlay)
         }.sum()
     }
@@ -12,7 +11,7 @@ fun main() {
     fun part2(input: List<String>): Int {
         return input.map { round ->
             val split = round.split(" ")
-            val opponent = opponentPlay[split.first()]!!
+            val opponent = opponentPlay[split.first()] ?: error("")
             val me = when(split[1]) {
                 "X" -> Result.LOSE
                 "Y" -> Result.DRAW
@@ -28,8 +27,6 @@ fun main() {
             me.score + myPlay.score
         }.sum()
     }
-
-
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day02_test")
